@@ -38,8 +38,8 @@ jobs:
       - name: SetEnv 
         shell: bash
         run: |
-          echo ${{ github.ref_name }} >> $BRANCH_NAME
-          echo $BRANCH_NAME >> $GITHUB_ENV
+          echo "${{ github.ref_name }}" >> $BRANCH_NAME
+          echo "${BRANCH_NAME#*/}" >> $GITHUB_ENV
           echo $GITHUB_ENV
 
       # - name: Cache
