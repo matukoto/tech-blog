@@ -39,7 +39,7 @@ jobs:
         shell: bash
         run: |
           echo ${{ github.ref_name }} >> $BRANCH_NAME
-          echo ${BRANCH_NAME#*/} >> $GITHUB_ENV
+          echo $BRANCH_NAME >> $GITHUB_ENV
           echo $GITHUB_ENV
 
       # - name: Cache
