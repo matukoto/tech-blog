@@ -38,9 +38,12 @@ jobs:
       - name: SetEnv 
         shell: bash
         run: |
-          echo "${{ github.ref_name }}" >> $BRANCH_NAME
-          echo "${BRANCH_NAME#*/}" >> $GITHUB_ENV
-          echo $GITHUB_ENV
+          echo ${{ github.ref_name }} >> $GITHUB_ENV
+        # echo $BRANCH_NAME
+        # echo $GITHUB_ENV
+        # BRANCH_NAME にリダイレクトできない
+        # __w/_temp/df2a3dcd-59db-4481-b646-cb520ecbe509.sh: line 1: $BRANCH_NAME: ambiguous redirect
+        # echo "${BRANCH_NAME#*/}" >> $GITHUB_ENV
 
       # - name: Cache
       #   uses: actions/cache@v3.0.11
