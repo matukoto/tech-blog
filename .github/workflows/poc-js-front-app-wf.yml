@@ -37,13 +37,13 @@ jobs:
         # if で条件が必要? release ブランチでPRだったらみたいな?
       - name: SetEnv 
         shell: bash
+        env:
+          BRANCH_NAME: $${{ github.ref_name }}
         run: |
-          echo ${{ github.ref_name }} >> $GITHUB_ENV
-        # echo $BRANCH_NAME
-        # echo $GITHUB_ENV
+         echo "${BRANCH_NAME#*/}" >> $GITHUB_ENV
+         echo $GITHUB_ENV
         # BRANCH_NAME にリダイレクトできない
         # __w/_temp/df2a3dcd-59db-4481-b646-cb520ecbe509.sh: line 1: $BRANCH_NAME: ambiguous redirect
-        # echo "${BRANCH_NAME#*/}" >> $GITHUB_ENV
 
       # - name: Cache
       #   uses: actions/cache@v3.0.11
