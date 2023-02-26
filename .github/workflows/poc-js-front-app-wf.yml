@@ -39,43 +39,41 @@ jobs:
         shell: bash
         env:
           PR_BRANCH_NAME: ${{ github.head_ref }}
-        run: |
-          sh ${{ github.workspace }}/.github/env.sh
-      # run: echo action_tag=${PR_BRANCH_NAME#*/} >> $GITHUB_ENV
+        run: echo build_tag=${PR_BRANCH_NAME#*/} >> $GITHUB_ENV
 
       - name: EnvCheck
         shell: bash
         run: |
           echo ${{ env.build_tag }}
 
-      # - name: Cache
-      #   uses: actions/cache@v3.0.11
-      #   with:
-      #     path: "**/node_modules"
-      #     key: node-modules-${{ github.sha }}
-      #     restore-keys: node-modules-
-      #
-      # - name: App Src Build
-      #   shell: bash
-      #   run: |
-      #       sh ${{ github.workspace }}/.github/build.sh
-      #
-      # - name: Unit Test
-      #   shell: bash
-      #   run: |
-      #       sh ${{ github.workspace }}/.github/unit_test.sh
-      #
-      # - name: Integration Test
-      #   shell: bash
-      #   run: |
-      #       sh ${{ github.workspace }}/.github/integration_test.sh
-      #
-      # - name: Run Trivy vulnerability scanner
-      #   uses: aquasecurity/trivy-action@master
-      #   with:
-      #     scan-type: 'fs'
-      #     scan-ref: './sample_app'
-      #     severity: 'CRITICAL'
-      #     timeout: 5m
-      #     vuln-type: library
-      #     exit-code: 0
+      - name: Cache
+        uses: actions/cache@v3.0.11
+        with:
+          path: "**/node_modules"
+          key: node-modules-${{ github.sha }}
+          restore-keys: node-modules-
+
+      - name: App Src Build
+        shell: bash
+        run: |
+            sh ${{ github.workspace }}/.github/build.sh
+
+      - name: Unit Test
+        shell: bash
+        run: |
+            sh ${{ github.workspace }}/.github/unit_test.sh
+
+      - name: Integration Test
+        shell: bash
+        run: |
+            sh ${{ github.workspace }}/.github/integration_test.sh
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: './sample_app'
+          severity: 'CRITICAL'
+          timeout: 5m
+          vuln-type: library
+          exit-code: 0
