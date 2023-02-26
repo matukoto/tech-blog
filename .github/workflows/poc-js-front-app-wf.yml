@@ -43,6 +43,10 @@ jobs:
           echo "action_tag=${BRANCH_NAME}" >> $GITHUB_ENV
           echo action_branch=${{ github.ref_name }} >> $GITHUB_ENV
           echo "action_branch=${{ github.ref_name }}" >> $GITHUB_ENV
+
+      - name: EnvCheck
+        shell: bash
+        run: |
           echo ${{ env.action_tag }}
           echo ${{ env.action_branch }}
          #- run: echo "${BRANCH_NAME#*/}"
