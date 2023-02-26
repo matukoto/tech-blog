@@ -39,9 +39,13 @@ jobs:
         shell: bash
         env:
           BRANCH_NAME: ${{ github.ref_name }}
-        run: echo "action_tag=${BRANCH_NAME}" >> $GITHUB_ENV
-            #- run: echo "${BRANCH_NAME#*/}"
-            #- run: echo "${{ env.action_tag }}"
+        run: |
+          echo "action_tag=${BRANCH_NAME}" >> $GITHUB_ENV
+          echo action_branch=${{ github.ref_name }}
+          echo ${{ env.action_tag }}
+          echo ${{ env.action_branch }}
+         #- run: echo "${BRANCH_NAME#*/}"
+         #- run: echo "${{ env.action_tag }}"
 
       # - name: Cache
       #   uses: actions/cache@v3.0.11
