@@ -41,11 +41,6 @@ jobs:
           PR_BRANCH_NAME: ${{ github.head_ref }}
         run: echo build_tag=${PR_BRANCH_NAME#*/} >> $GITHUB_ENV
 
-      - name: EnvCheck
-        shell: bash
-        run: |
-          echo ${{ env.build_tag }}
-
       - name: Cache
         uses: actions/cache@v3.0.11
         with:
