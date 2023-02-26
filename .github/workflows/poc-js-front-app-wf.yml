@@ -38,14 +38,15 @@ jobs:
       - name: SetEnv 
         shell: bash
         env:
-          BRANCH_NAME: ${{ github.ref_name }}
+          PR_BRANCH_NAME: ${{ github.head_ref }}
         run: |
-          echo action_tag=${BRANCH_NAME#*/} >> $GITHUB_ENV
+          sh ${{ github.workspace }}/.github/env.sh
+      # run: echo action_tag=${PR_BRANCH_NAME#*/} >> $GITHUB_ENV
 
       - name: EnvCheck
         shell: bash
         run: |
-          echo ${{ env.action_tag }}
+          echo ${{ env.build_tag }}
 
       # - name: Cache
       #   uses: actions/cache@v3.0.11
